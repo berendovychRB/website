@@ -3,6 +3,7 @@ package com.buyandsell.service;
 import com.buyandsell.entity.Announcement;
 
 import java.util.List;
+import java.util.Set;
 
 public interface AnnouncementService {
 
@@ -14,7 +15,7 @@ public interface AnnouncementService {
 
     Announcement getOne(Long id);
 
-    List<Announcement> findAllByText(String text);
+    List<Announcement> findAllByText(Announcement announcement);
 
 //    Announcement edit(Announcement announcement);
 

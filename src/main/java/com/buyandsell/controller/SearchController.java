@@ -23,8 +23,8 @@ public class SearchController {
     @PostMapping("/search")
     public String search(@RequestParam String text,
                          Model model){
-        List<Announcement> announcements = announcementService.findAllByText(text);
-        model.addAttribute("announcements", announcements);
+//        List<Announcement> announcements = announcementService.findAllByText(text,text);
+//        model.addAttribute("announcements", announcements);
         return "searchResult";
     }
 

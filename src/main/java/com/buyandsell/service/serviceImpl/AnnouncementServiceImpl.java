@@ -6,7 +6,8 @@ import com.buyandsell.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
+import java.util.*;
 
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
@@ -35,7 +36,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public List<Announcement> findAllByText(String text) {
-        return announcementRepository.findAllByTitleOrDescriptionContains(text);
+    public List<Announcement> findAllByText(Announcement announcement) {
+        String[] arr = announcement.getTitle().split(" ");
+        String[] arr1 =  announcement.getDescription().split(" ");
+        Set wordsSet = new HashSet(Arrays.asList(arr));
+        Set wS = new HashSet(Arrays.asList(arr1));
+        return announcementRepository.findFirst3ByTitleLikeAndDescriptionLikeAndIdNot(announcement.getId(),wordsSet,wS);
+
     }
 }
