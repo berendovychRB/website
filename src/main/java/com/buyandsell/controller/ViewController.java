@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ViewController {
@@ -21,7 +22,7 @@ public class ViewController {
                        Model model){
         Announcement announcement = announcementService.getOne(id);
         model.addAttribute("announcement",announcement);
-        List<Announcement> announcements = announcementService.findAllByText(announcement);
+        Set<Announcement> announcements = announcementService.findAllByText(announcement);
         model.addAttribute("announcements", announcements);
         return "view";
     }

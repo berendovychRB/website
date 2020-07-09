@@ -15,7 +15,7 @@ public interface AnnouncementService {
 
     Announcement getOne(Long id);
 
-    List<Announcement> findAllByText(Announcement announcement);
+    Set<Announcement> findAllByText(Announcement announcement);
 
 //    Announcement edit(Announcement announcement);
 

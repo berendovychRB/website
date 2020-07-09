@@ -18,5 +18,5 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Long
 
 //    List<Announcement> findFirst3ByTitleLikeAndDescriptionLike(String text, String text1);
 
-    List<Announcement> findFirst3ByTitleLikeAndDescriptionLikeAndIdNot(Long id,Set<String> s, Set<String> s1);
+    List<Announcement> findFirst3ByTitleContainingAndIdNotOrDescriptionContainingAndIdNot(String s,Long id, String s1 , Long id1);
 }

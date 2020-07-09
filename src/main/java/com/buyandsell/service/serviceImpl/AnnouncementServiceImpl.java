@@ -36,12 +36,17 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public List<Announcement> findAllByText(Announcement announcement) {
-        String[] arr = announcement.getTitle().split(" ");
-        String[] arr1 =  announcement.getDescription().split(" ");
-        Set wordsSet = new HashSet(Arrays.asList(arr));
-        Set wS = new HashSet(Arrays.asList(arr1));
-        return announcementRepository.findFirst3ByTitleLikeAndDescriptionLikeAndIdNot(announcement.getId(),wordsSet,wS);
+    public Set<Announcement> findAllByText(Announcement announcement) {
+        String[] arrTitles = announcement.getTitle().split(" ");
+        String[] arrDescriptions =  announcement.getDescription().split(" ");
+        Set<String> wordsSet = new HashSet(Arrays.asList(arrTitles));
+        wordsSet.addAll(Arrays.asList(arrDescriptions));
+        Set<Announcement> search = new HashSet<>();
+        for (String s : wordsSet){
+            search.addAll(announcementRepository.findFirst3ByTitleContainingAndIdNotOrDescriptionContainingAndIdNot(s,announcement.getId(),s,announcement.getId()));
+            if (search.size() >= 3) break;
+        }
+        return search;
 
     }
 }
